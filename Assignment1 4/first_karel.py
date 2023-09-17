@@ -10,21 +10,21 @@ turn_left()
 move()
 pick_beeper()
 """
-
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
 def main():
     turn_left()
     move()
     pick_beeper()
     move()
-    turn_left()
-    turn_left()
-    turn_left()
+    turn_right()
     move()
     move()
     pick_beeper()
-    turn_left()
-    turn_left()
-    turn_left()
+    turn_right()
     move()
     move()
     pick_beeper()
