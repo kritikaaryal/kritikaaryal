@@ -25,7 +25,7 @@ def fill_row():
     while front_is_clear():
         put_beeper()
         move()
-    while front_is_blocked():
+    if front_is_blocked():
         put_beeper()
         turn_around()
     while front_is_clear():
