@@ -1,13 +1,7 @@
 def main():
-    print("")
+    print("Welcome to Apple Teleport")
     s= input("Please enter your name")
-    
-    
-    
-    
-    
-if __name__ == "__main__":
-    main()
+
 gender=input("Please specify the gender of your character (M/F/N): ")
 gender = gender.lower()
 while(gender != 'm' and gender != 'f' and gender!= 'n'):
@@ -22,13 +16,18 @@ if gender == 'm' :
 elif gender == 'f':
     nominative = "she"
     accusative = "her"
-    genitive "hers"
+    genitive = "hers"
     reflexive = "herself"
 elif gender == 'n':
     nominative = "their"
     accusative = "them"
-    genitive "theirs"
+    genitive = "theirs"
     reflexive = "themselves"
-else:
-    pass
+  
+    
+
+
+if __name__ == "__main__":
+    main()
+
     
