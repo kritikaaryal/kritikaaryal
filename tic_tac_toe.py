@@ -188,11 +188,7 @@ ttk.Label(frm, text='', font=("Ariel", 12)).grid(row=6, column=0, columnspan=3)
 easy_button = ttk.Button(frm, text="Easy", command=set_easy)
 medium_button = ttk.Button(frm, text="Medium", command=set_medium)
 hard_button = ttk.Button(frm, text="Hard", command=set_hard)
-
-
     
-    
-
 
 def toggle_mode():
     global mode
