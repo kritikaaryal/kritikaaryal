@@ -1,17 +1,28 @@
 from graphics import *
-message = Text(Point(3,4), "Happy Holidays!")
+
+win = GraphWin("My Holiday Card", 500, 500)
+
+def main():
+    
+    
+    
+    width = 500
+    height = 500
+    draw_text()
+    draw_snowman()
+    
 
 def draw_text():
-    text = Text(Point(200,150), "Happy Holidays!")
+    text = Text(Point(100,150), "Happy Holidays!")
     text.setSize(24)
-    text.setStyle("Bold")
+    text.setStyle("bold")
     text.setFill("red")
     text.draw(win)
     
+
 def draw_snowman():
 
-    win = GraphWin("Snowman", 500, 500)
-    win.setBackground("light blue")  
+    win.setBackground("Pink")  
 
 
     bottom = Circle(Point(250, 400), 100)  
@@ -67,5 +78,8 @@ def draw_snowman():
     win.close()
 
 
-draw_snowman()
-draw_text()
+
+
+if __name__ == "__main__":
+    main()
+
