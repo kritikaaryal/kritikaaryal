@@ -1,6 +1,6 @@
 from graphics import*
 
-verses = ['A partridge in a pear tree.', 'Two turtle doves and','Three French hens','four calling birds','five golden rings','six geese a-laying','seven swans a-swimming','eight maids a-milking','nine ladies dancing','ten lords a-leaping','eleven pipers piping','twelve drummers drumming']
+verses = ['A partridge in a pear tree.', 'two turtle doves and','three French hens','four calling birds','five golden rings','six geese a-laying','seven swans a-swimming','eight maids a-milking','nine ladies dancing','ten lords a-leaping','eleven pipers piping','twelve drummers drumming']
     
 def verse(i, win):
     first_verse = Text(Point(250, 200), verses[i - 1])
@@ -29,6 +29,21 @@ def add_star(win):
                    Point(300, 100), Point(270, 100))
     star.setFill('yellow')
     star.draw(win)
+    
+def draw_text(win):
+    text = Text(Point(100,150), "🎅🤶❄⛄🎄🎁")
+    text.setSize(30)
+    text.setStyle("bold")
+    text.setFill("red")
+    text.draw(win)
+def draw_2(win):
+    text = Text(Point(390,150), "✨🥣🎶👼🦌🛷")
+    text.setSize(30)
+    text.setStyle("bold")
+    text.setFill("red")
+    text.draw(win)
+    
+    
 
 
 def main():
@@ -37,6 +52,8 @@ def main():
 
     add_christmas_tree(win)
     add_star(win)
+    draw_text(win)
+    draw_2(win)
 
     days = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'tenth', 'eleventh', 'twelfth']
     for i in range(1, 13):
