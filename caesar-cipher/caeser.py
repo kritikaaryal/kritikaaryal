@@ -17,7 +17,16 @@ def main():
     for line in sys.stdin:
         line = line.strip()
         result += encrypt_line(line, key) + "\n"
-print(result)
+        print(result)
+    shift = ord(key[0]) - 32
+    result = ""
+        for char in line:
+    result += encrypt_letter(char,shift)
+        return result
+    index = ord(char)
+    shifted_index = index + key
+        result = chr(shifted_index)
+    return result
 
 if __name__ == "__main__":
     main()
