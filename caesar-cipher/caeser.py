@@ -33,12 +33,20 @@ def main_menu() -> str:
 # leading or trailing white space entered by the user
     return input("Please select an option: ").strip()
 def main():
-    key = input("Please enter the encryption key: ")
-    result = ""
-    for line in sys.stdin:
-        line = line.strip()
-        result += encrypt_line(line, key) + "\n"
-    print(result)
+    command = main_menu()
+    while command != "0": # Option to exit program
+        if command == "1": # Option to change encryption key
+            key = input("Please enter the encryption key: ")
+         elif command == "2": # Option to encrypt a message
+            encrypt_message(key)
+        elif command == "3":
+    # TODO: Replace "pass" below with the
+    # code to decrypt a message
+            pass
+        else:
+    print("Invalid entry. Please select a valid option.")
+    command = main_menu()
+    print("Goodbye.")
     
 
 if __name__ == "__main__":
