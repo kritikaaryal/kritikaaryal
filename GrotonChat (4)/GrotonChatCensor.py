@@ -65,12 +65,7 @@ def score(message:str) -> (str, float, float, str):
     elif adjustment < -0.5:
         user = "<ADMIN>"
         text = "Your message has been censored."
-    if False:
-        user = "<ADMIN>"
-        text = "You have been banned."
-    elif False:
-        user = "<ADMIN>"
-        text = "Your message has been censored."
+   
 
     # TODO: The line below truncates the text to be displayed
     # at 40 characters since this is what fits naturally in
