@@ -14,7 +14,9 @@ bad_things = [terrible, awful, bad]
 # "<ADMIN>" key.  Set it to an initial value of 0.
 scores = {}
 
-def check_needs_score(good_things : list, \bad_things : list , \message : str) -> (bool, str):
+def check_needs_score(good_things : list, \
+                      bad_things : list , \
+                      message : str) -> (bool, str):
     lowercase_message = message.lower()
     for good_thing in good_things:
         if good_thing.lower() in lowercase_message:
