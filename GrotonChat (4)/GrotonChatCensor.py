@@ -7,68 +7,64 @@ SENTIM = "https://sentim-api.onrender.com/api/v1/"
 # good_things list should contain strings relevant to Groton.
 # The bad_things list should contain strings relevant to
 # St. Marks (or some other objectively bad place).
-good_things = [good, awesome, great]
-bad_things = [terrible, awful, bad]
+good_things = ["groton", "schoolhouse", "zebra" "tight-knit community"]
+bad_things = ["st.marks", "lion", "southborough" ]
 
 #TODO:  Initialize the dictionary below by adding in the special
 # "<ADMIN>" key.  Set it to an initial value of 0.
-scores = {}
+scores = {"<ADMIN>":0}
 
 def check_needs_score(good_things : list, \
                       bad_things : list , \
                       message : str) -> (bool, str):
     lowercase_message = message.lower()
-    for good_thing in good_things:
-        if good_thing.lower() in lowercase_message:
-            return True, "positive"
-    for bad_thing in bad_things:
-        if bad_thing.lower() in lowercase_message:
-            return True, "negative"
+    for word in lowercase_message.split():
+        print(word)
+        for good_thing in good_things:
+            if good_thing.lower() == word:
+                return True, "positive"
+        for bad_thing in bad_things:
+            if bad_thing.lower() == word:
+                return True, "negative"
     return False, "positive" 
 
 def get_adjustment(text:str, desired_type:str) -> float:
-    # TODO: Use the requests library to send a JSON requests
-    # to the sentimental analysis API.  Then, process the result.
-    # If the desired_type passed in is the same as the "type" of
-    # the "result" returned, return the absolute value of the
-    # "polarity". Otherwise, return the negative of the absolute
-    # value of the polarity.
-    return 0
+    resp = requests.post(SENTIM, json={"text": text})
+    j = resp.json()
+    polarity = j["result"]["polarity"]
+    analysis_type = j["result"]["type"]
+    if analysis_type == desired_type:
+        adjustment = abs(polarity)
+    else:
+        adjustment = -abs(polarity)
+    
+    return adjustment
 
 def score(message:str) -> (str, float, float, str):
-    # TODO: Update the line below to split the message parameter
-    # by the tab character to get the username and the text
-    # of the message in two variables.
     user, text = message.split('\t')
 
     # TODO: Update the line below to call the check_needs_score
     # function with the appropiate parameters to
     # determine if the message needs to be scored.
-    needs_score, desired_type = False, "positive"
-
+    needs_score, desired_type = check_needs_score(good_things, bad_things, text)
+    print(check_needs_score(good_things, bad_things, text))
     adjustment = 0
     polarity = 0
-    # TODO: Check the needs_score variable to see if the
-    # message needs to be scored.  If it does, call the
-    # get_adjustment function to determine the score
-    if False:
-        adjustment = 0
 
-    # TODO: Update the user's score based on the adjustment
-    # calculated above.  Dictionaries have a "get" function
-    # that will be helpful here, as it allows you to retrieve
-    # a value from a dictionary if it exists and specify a default
-    # if it does not.  The syntax is: d.get(key, default), where
-    # d is the name of the dictionary, key is the element for which
-    # you're searching, and default is the value that should be
-    # returned if the key isn't found.
-    scores[user] = 0
+    if needs_score:
+        # Call the get_adjustment function to determine the score adjustment
+        adjustment = get_adjustment(text, desired_type)
 
-    # TODO: Update the conditions below to reflect the
-    # following business logic: users who accumulate
-    # a score less than -2 are automatically banned.
-    # Individual messages that score less than -0.5
-    # are censored.
+    # Update the user's score based on the adjustment calculated above
+    scores[user] = scores.get(user, 0) + adjustment
+
+    # Check conditions for banning users or censoring messages
+    if scores.get(user, 0) < -2:
+        user = "<ADMIN>"
+        text = "You have been banned."
+    elif adjustment < -0.5:
+        user = "<ADMIN>"
+        text = "Your message has been censored."
     if False:
         user = "<ADMIN>"
         text = "You have been banned."
@@ -88,4 +84,16 @@ def score(message:str) -> (str, float, float, str):
     # an integer counter to do this), appending slices of the message
     # to your list.  Finally, return the list you constructed
     # instead of the truncated text.
-    return user, scores[user], adjustment, text[0:40]
+    
+    if len(text)<=40:
+        return user, scores[user], adjustment, text
+    
+    segments = []
+    length = len(text)
+    i = 0
+    while i < length:
+        segment = text[i:i+40]
+        segments.append(segment)
+        i += 40
+    return user, scores[user], adjustment, segments
+
