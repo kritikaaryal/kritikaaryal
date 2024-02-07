@@ -1,12 +1,13 @@
 from graphics import *
 
 def get_nickname() -> str:
-    win = GraphWin("Enter Your Nickname", 300, 100)
-    e = Entry(Point(210,50),20)
-    e.setFill("white")
+    win = GraphWin("GrotonChat 🚫🦁", 500, 500)
+    e = Entry(Point(300,250),20)
+    e.setFill("maroon")
     e.draw(win)
-    t = Text(Point(70,50), "Enter a Nickname:")
-    t.setSize(14)
+    t = Text(Point(120,250), "Enter a Nickname:")
+    t.setFill("#cf3441")
+    t.setSize(20)
     t.draw(win)
     while win.checkKey() != "Return":
         pass
@@ -15,13 +16,15 @@ def get_nickname() -> str:
     return nickname[0:12]
 
 def run(inbound_messages, outbound_messages):
-    win = GraphWin("GrotonChat", 610, 400)
+    win = GraphWin("GrotonChat 🚫🦁", 610, 400)
     e = Entry(Point(390,360),50)
-    e.setFill("white")
+    e.setFill("maroon")
     e.draw(win)
     b = Rectangle(Point(15,10), Point(600, 330))
+    b.setFill("maroon")
     b.draw(win)
     t = Text(Point(300, 170), "")
+    t.setFill("pink")
     t.setSize(16)
     t.setFace("courier")
     t.draw(win)
