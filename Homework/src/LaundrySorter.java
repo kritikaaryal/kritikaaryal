@@ -57,10 +57,10 @@ public class LaundrySorter extends WindowController {
             dragging = true;
         }
     }
-
     public void onMouseDrag(Location l) {
         if (dragging) {
-            swatch.move(dx,dy);
+            swatch.move(l.getX() - pressLocation.getX(), l.getY() - pressLocation.getY());
+            pressLocation = l;
         }
     }
 
@@ -76,8 +76,10 @@ public class LaundrySorter extends WindowController {
         }
 
         if (correctLocation) {
-            swatch.setColor(c);
+        	c = generateRandomColor();
             cCount++;
+            
+            swatch.setColor(c);
         }
           else if (swatch.getX() < 55 || swatch.getX() > 345 || swatch.getY() < 200 || swatch.getY() > 280) {
             swatch.moveTo(start);	
@@ -85,7 +87,6 @@ public class LaundrySorter extends WindowController {
             iCount++;
         }
 
-        c = generateRandomColor();
         swatch.moveTo(start);
         correct.setText("Correct = " + cCount);
         incorrect.setText("Incorrect = " + iCount);
