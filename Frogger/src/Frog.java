@@ -1,5 +1,6 @@
 import objectdraw.*;
 import java.awt.Image;
+import java.awt.Color;
 
 public class Frog {
     private VisibleImage frogImage;
@@ -7,6 +8,7 @@ public class Frog {
     private double laneWidth;
     private DrawingCanvas canvas;
     private boolean isAlive;
+    private Text ouch; 
 
     public Frog(Image frogPic, Location start, double laneWidth, DrawingCanvas canvas) {
         this.frogImage = new VisibleImage(frogPic, start, canvas);
@@ -14,6 +16,7 @@ public class Frog {
         this.laneWidth = laneWidth;
         this.canvas = canvas;
         this.isAlive = true;
+        this.ouch = null; 
     }
 
     public void hopToward(Location point) {
@@ -41,14 +44,21 @@ public class Frog {
     public void kill() {
         if (isAlive) {
             isAlive = false;
-            new Text("OUCH!", frogImage.getX(), frogImage.getY() + frogImage.getHeight() + 10, canvas);
+            frogImage.hide();
+            ouch = new Text("OUCH!", frogImage.getX(), frogImage.getY() + frogImage.getHeight() - 20, canvas);
+            ouch.setColor(Color.white);
         }
     }
 
     public void reincarnate() {
         if (!isAlive) {
             isAlive = true;
+            frogImage.show();
             frogImage.moveTo(start);
+            if (ouch != null) {
+                ouch.removeFromCanvas();
+                ouch = null;
+            }
         }
     }
 
