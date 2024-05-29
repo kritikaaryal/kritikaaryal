@@ -25,14 +25,10 @@ public class Lane extends ActiveObject {
     public void run() {
         while(true) {
             new Vehicle(vehicleImage, startLocation, velocity, distance, frog, canvas);
-
-            // Assuming the vehicle length is 100 (as per your previous code)
-            double vehicleLength = 100;
-            // Time it takes for a vehicle to travel its own length
-            double timeToTravelLength = vehicleLength / velocity;
-            // Ensure a minimum spacing of 1.5 times the vehicle length
-            double minTime = 3.0 * timeToTravelLength; 
-            // Allow some random variation
+           
+            double vehicleLength = 100;            
+            double timeToTravelLength = vehicleLength / velocity;       
+            double minTime = 3.0 * timeToTravelLength;            
             double maxTime = 7 * timeToTravelLength;
             double pauseTime = minTime + (maxTime - minTime) * Math.random();
             pause(pauseTime);
