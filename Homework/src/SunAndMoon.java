@@ -37,7 +37,6 @@ public class SunAndMoon extends WindowController {
 	}
 		
 				
-	}
 	
 	
 	public void onMousePress(Location l) {
